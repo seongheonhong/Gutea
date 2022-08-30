@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>gutea_msgs</name>
+  <version>0.1.0</version>
+  <description>The gutea_msgs package</description>
+
+  <maintainer email="minwoolee@snu.ac.kr">minwoolee</maintainer>
+
+  <license>MIT</license>
+
+  <!-- core packages -->
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <!-- message generation packages -->
+  <build_depend>message_generation</build_depend>
+  <exec_depend>message_runtime</exec_depend>
+
+</package>

@@ -1,0 +1,4 @@
+int32 mode
+ClassificationResult[] results
+---
+int32[] rooms

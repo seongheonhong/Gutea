@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<package>
+  <name>robot_msgs</name>
+  <version>0.1.0</version>
+  <description>
+    Message and service types: custom messages and services for buro packages
+  </description>
+  <license>Apache License 2.0</license>
+  <author email="jy6659@rastech.co.kr">Jhung</author>
+  <maintainer email="jy6659@rastech.co.kr">Jhung</maintainer>
+  <url type="website">http://www.rastech.co.kr</url>
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>std_msgs</build_depend>
+  <build_depend>std_srvs</build_depend>
+  <build_depend>sensor_msgs</build_depend>
+  <build_depend>message_generation</build_depend>
+  <run_depend>std_msgs</run_depend>
+  <run_depend>std_srvs</run_depend>
+  <run_depend>sensor_msgs</run_depend>
+  <run_depend>message_runtime</run_depend>
+  <export></export>
+</package>

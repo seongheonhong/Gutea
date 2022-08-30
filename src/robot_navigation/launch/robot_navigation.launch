@@ -1,0 +1,57 @@
+<!-- 
+    Safety controller
+
+<launch>
+  <node pkg="nodelet" type="nodelet" name="robot_safety_controller" args="load robot_safety_controller/SafetyControllerNodelet /mobile_base_nodelet_manager">
+    <remap from="robot_safety_controller/cmd_vel" to="/cmd_vel_mux/input/safety_controller"/>
+    <remap from="robot_safety_controller/events/bumper" to="/mobile_base/events/bumper"/>
+    <remap from="robot_safety_controller/events/cliff" to="/mobile_base/events/cliff"/>
+    <remap from="robot_safety_controller/events/wheel_drop" to="/mobile_base/events/wheel_drop"/>
+  </node>
+</launch>
+
+-->
+<launch>
+  <!-- robot model   -->
+  <arg name="model" default = "burger"/>
+  <arg name="urdf_file" default="$(find xacro)/xacro '$(find robot_description)/urdf/turtlebot3_$(arg model).urdf.xacro'" />
+  <param name="robot_description" command="$(arg urdf_file)" />
+
+
+
+  <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher" output="screen">
+    <param name="publish_frequency" type="double" value="5.0" />
+  </node> 
+
+  <!-- robot control option -->
+  <!--<include file="$(find robot_navigation)/launch/velocity_smoother.launch.xml"/> -->
+  <!--<include file="$(find robot_navigation)/launch/safety_controller.launch.xml"/> -->
+  
+  <!-- tf  -->
+  <node pkg="robot_tf" type="robot_tf_node" name="robot_tf_nav" output="screen">
+  </node> -->  <!-- Modified by HSH --> 
+
+  <!-- Map server -->
+  <arg name="map_file" default="$(find robot_navigation)/maps/map.yaml"/>
+  <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)">
+  </node>
+
+  <!-- AMCL -->
+  <include file="$(find robot_navigation)/launch/amcl.launch.xml"/>
+
+  <!-- move_base -->  
+  <!--<arg name="cmd_vel_topic" default="/mobile_base/commands/velocity" />-->
+  <arg name="cmd_vel_topic" default="/cmd_vel" />  <!-- -->
+  <arg name="odom_topic" default="odom" />
+  <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
+    <rosparam file="$(find robot_navigation)/param/costmap_common_params.yaml" command="load" ns="global_costmap" />
+    <rosparam file="$(find robot_navigation)/param/costmap_common_params.yaml" command="load" ns="local_costmap" />
+    <rosparam file="$(find robot_navigation)/param/local_costmap_params.yaml" command="load" />
+    <rosparam file="$(find robot_navigation)/param/global_costmap_params.yaml" command="load" />
+    <rosparam file="$(find robot_navigation)/param/dwa_local_planner_params.yaml" command="load" />
+    <rosparam file="$(find robot_navigation)/param/move_base_params.yaml" command="load" />
+    <remap from="cmd_vel" to="$(arg cmd_vel_topic)"/>
+    <remap from="odom" to="$(arg odom_topic)"/>
+  </node>
+</launch>
+

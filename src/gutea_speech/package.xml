@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>gutea_speech</name>
+  <version>0.1.0</version>
+  <description>The gutea_speech package</description>
+
+  <maintainer email="minwoolee@snu.ac.kr">minwoolee</maintainer>
+
+  <license>MIT</license>
+
+  <!-- core packages -->
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>rospy</build_depend>
+  <build_export_depend>rospy</build_export_depend>
+  <exec_depend>rospy</exec_depend>
+
+  <!-- additional packages -->
+  <depend>gutea_msgs</depend>
+
+</package>

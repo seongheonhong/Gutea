@@ -1,0 +1,5 @@
+cost_scaling_factor: 1.723
+inflation_radius: 0.8
+acc_lim_trans: 0.5
+acc_lim_rot: 
+
